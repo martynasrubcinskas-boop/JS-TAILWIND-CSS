@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="lt" class="h-full m-0 p-0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turizmas - Pagrindinis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { 
+      overflow-y: scroll; 
+    }
+    html, body { 
+      margin: 0 !important; 
+      padding: 0 !important; 
+      width: 100% !important; 
+      min-height: 100vh; 
+    }
+    
+    #main-logo { letter-spacing: 1px; }
+    .sticky-header { position: sticky; top: 0; z-index: 50; }
+    .clickable-row { cursor: pointer; transition: all 0.2s; }
+    .clickable-row:hover { background-color: #ecfdf5 !important; }
+    .interactive-card { cursor: pointer; transition: all 0.3s ease; }
+    .interactive-card:hover { transform: translateY(-3px); }
+    .chart-bar { transition: height 0.5s ease, opacity 0.3s; cursor: pointer; }
+    .chart-bar:hover { opacity: 0.8; }
+  </style>
+</head>
+<body id="app-body" class="bg-gray-50 text-gray-800 flex flex-col min-h-screen m-0 p-0 w-full">
+
+  <header class="sticky-header bg-emerald-700 text-white shadow-md w-full px-4 sm:px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
+      <!-- PRIDĖTAS openModal() ANT LOGOTIPO -->
+      <h1 id="main-logo" onclick="openModal('Apie Turizmas: Kelionių Oazė 🌍', 'Sveiki atvykę į mūsų kelionių portalą!\n\nMes esame jūsų patikimas partneris planuojant svajonių atostogas. Čia rasite pačius geriausius pasiūlymus, ekspertų patarimus bei interaktyvius įrankius patogiam kelionių planavimui.')" class="text-xl sm:text-2xl font-bold cursor-pointer hover:opacity-90 transition flex items-center gap-1">
+        🌍 <span>Turizmas: Kelionių Oazė</span>
+      </h1>
+      <button onclick="toggleMobileMenu()" class="md:hidden text-white focus:outline-none p-2 text-2xl" aria-label="Meniu">☰</button>
+
+      <nav id="nav-menu" class="hidden md:block w-full md:w-auto mt-4 md:mt-0">
+        <ul class="flex flex-col md:flex-row gap-3 md:gap-8 font-medium">
+          <li><a href="turizmas.html" class="underline font-bold block py-1">Pagrindinis</a></li>
+          <li><a href="apie.html" class="hover:underline block py-1">Apie mus</a></li>
+          <li><a href="galerija.html" class="hover:underline block py-1">Galerija</a></li>
+          <li><a href="uzsakymas.html" class="hover:underline block py-1">Užsakymas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <main class="lg:col-span-3 space-y-6 w-full">
+      <div class="bg-white p-5 sm:p-6 rounded-lg shadow-sm border bg-card w-full space-y-3">
+        <h2 class="text-2xl font-bold text-emerald-800">Pasaulio Turizmo Atradimai ir Populiariausios Kryptys</h2>
+        <p class="leading-relaxed">Sveiki atvykę į mūsų kelionių portalą! Čia rasite naujausius sezono maršrutus, lėktuvų bilietų tendencijas bei išskirtinius pasiūlymus. Planuokite savo atostogas be jokio streso.</p>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3 pt-2">
+          <button onclick="openModal('Pasiūlymas: Italija', 'Dabar registruojantis Italijos kelionėms taikoma 20% nuolaida!\n\nĮskaičiuota: skrydžiai, 4* viešbutis bei pažintinės ekskursijos Romoje ir Florencijoje.')" class="w-full sm:w-auto bg-emerald-600 text-white px-4 py-2 rounded font-bold hover:bg-emerald-700 transition">
+            🔥 Karštas Pasiūlymas Italijai
+          </button>
+          <button onclick="openModal('Pasiūlymas: Egzotika', 'Egzotinės kelionės į Tailandą ir Balį saulėtam bei įsimintinam poilsiui.\n\nĮskaičiuotas maitinimas, ekskursijos po džiungles ir privatūs pervežimai.')" class="w-full sm:w-auto bg-amber-600 text-white px-4 py-2 rounded font-bold hover:bg-amber-700 transition">
+            🌴 Egzotiniai Maršrutai
+          </button>
+        </div>
+      </div>
+
+      <!-- Kortelių sekcija -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div onclick="openModal('Individualūs Maršrutai', 'Sudarome asmeninius kelionių planus pagal jūsų norus ir biudžetą.\n\n• Asmeninis kelionės tempas\n• Lankstus lankytinų vietų sąrašas\n• Nuolatinė pagalba kelionės metu')" class="interactive-card bg-white p-5 rounded-lg shadow-sm border bg-card">
+          <div class="text-3xl mb-2">🗺️</div>
+          <h3 class="font-bold text-emerald-800 text-lg mb-1">Individualūs Maršrutai</h3>
+          <p class="text-gray-600 text-sm">Planai sudaromi specialiai jums – jokių sausų gido grupių ar skubėjimo.</p>
+        </div>
+        <div onclick="openModal('Grupinės Kelionės', 'Kelionės patyrusių gidų lydimoms grupėms.\n\n• Puiki draugija ir naujos pažintys\n• Pilnai suplanuotas laikas ir transportas\n• Profesionalūs gido pasakojimai lietuvių kalba')" class="interactive-card bg-white p-5 rounded-lg shadow-sm border bg-card">
+          <div class="text-3xl mb-2">👥</div>
+          <h3 class="font-bold text-emerald-800 text-lg mb-1">Grupinės Kelionės</h3>
+          <p class="text-gray-600 text-sm">Mėgaukitės bendraminčių draugija ir profesionalaus gido pasakojimais.</p>
+        </div>
+        <div onclick="openModal('Verslo Kelionės', 'Skrydžių bei viešbučių rezervacijos ir ataskaitos įmonėms.\n\n• Greitas komandiruočių organizavimas\n• Sąskaitų ir dokumentų tvarkymas\n• 24/7 skubi pagalba pasikeitus planams')" class="interactive-card bg-white p-5 rounded-lg shadow-sm border bg-card">
+          <div class="text-3xl mb-2">💼</div>
+          <h3 class="font-bold text-emerald-800 text-lg mb-1">Verslo Kelionės</h3>
+          <p class="text-gray-600 text-sm">Greitas ir sklandus komandiruočių organizavimas įmonėms.</p>
+        </div>
+      </div>
+
+      <!-- Diagrama -->
+      <div class="bg-white p-5 sm:p-6 rounded-lg shadow-sm border bg-card w-full space-y-3">
+        <h3 class="text-xl font-bold text-emerald-800">2026 m. Keliautojų Srautų Diagrama</h3>
+        <p class="text-gray-600 text-sm">Paspauskite ant stulpelio, kad pamatytumėte mėnesio statistiką.</p>
+        <div class="h-48 flex items-end justify-between gap-2 border-b-2 border-l-2 border-emerald-700 p-2">
+          <div onclick="showChartInfo('Sausis', 1200)" class="chart-bar bg-emerald-400 w-full h-[30%] rounded-t flex justify-center items-center text-white font-bold text-xs sm:text-sm">Saus</div>
+          <div onclick="showChartInfo('Vasaris', 1500)" class="chart-bar bg-emerald-400 w-full h-[40%] rounded-t flex justify-center items-center text-white font-bold text-xs sm:text-sm">Vas</div>
+          <div onclick="showChartInfo('Kovas', 2100)" class="chart-bar bg-emerald-500 w-full h-[55%] rounded-t flex justify-center items-center text-white font-bold text-xs sm:text-sm">Kov</div>
+          <div onclick="showChartInfo('Balandis', 2800)" class="chart-bar bg-emerald-500 w-full h-[70%] rounded-t flex justify-center items-center text-white font-bold text-xs sm:text-sm">Bal</div>
+          <div onclick="showChartInfo('Gegužė', 3500)" class="chart-bar bg-emerald-600 w-full h-[85%] rounded-t flex justify-center items-center text-white font-bold text-xs sm:text-sm">Geg</div>
+          <div onclick="showChartInfo('Birželis', 4200)" class="chart-bar bg-emerald-700 w-full h-[100%] rounded-t flex justify-center items-center text-white font-bold text-xs sm:text-sm">Bir</div>
+        </div>
+      </div>
+
+      <!-- Kainoraštis -->
+      <div class="bg-white p-5 sm:p-6 rounded-lg shadow-sm border bg-card w-full space-y-3 overflow-hidden">
+        <h3 class="text-xl font-semibold">Populiariausių Kelionių Kainorštis</h3>
+        <p class="text-gray-500 text-sm">Spustelėkite ant bet kurios eilutės, kad peržiūrėtumėte išsamią programą.</p>
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left border-collapse min-w-[500px]">
+            <thead>
+              <tr class="bg-emerald-100 border-b text-emerald-900">
+                <th class="p-3">Kryptis</th>
+                <th class="p-3">Miestas</th>
+                <th class="p-3">Trukmė</th>
+                <th class="p-3">Maitinimas</th>
+                <th class="p-3">Kaina</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y">
+              <tr class="clickable-row" onclick="openModal('Italija: Roma', 'Programoje:\n• Skrydis iš Vilniaus ir 4* viešbutis mieste\n• Ekskursija po Koliziejų ir Vatikaną\n• Laisvas laikas italų virtuvės atradimams')">
+                <td class="p-3 font-semibold">Italija</td><td class="p-3">Roma</td><td class="p-3">7 d.</td><td class="p-3">Pusryčiai</td><td class="p-3 text-emerald-600 font-bold">499 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Ispanija: Barselona', 'Programoje:\n• Skrydis ir viešbutis šalia jūros kranto\n• Sagrada Familia ir Park Guell lankymas\n• Poilsis paplūdimyje bei vakariniai renginiai')">
+                <td class="p-3 font-semibold">Ispanija</td><td class="p-3">Barselona</td><td class="p-3">5 d.</td><td class="p-3">Viskas įskaičiuota</td><td class="p-3 text-emerald-600 font-bold">399 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Graikija: Atėnai', 'Programoje:\n• Antikinis paveldas ir Akropolio lankymas\n• Vieno dienyno kruizas po artimiausias salas\n• Tradicinės graikiškos vakarienės')">
+                <td class="p-3 font-semibold">Graikija</td><td class="p-3">Atėnai</td><td class="p-3">7 d.</td><td class="p-3">Pusryčiai/Vakarienė</td><td class="p-3 text-emerald-600 font-bold">549 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Prancūzija: Paryžius', 'Programoje:\n• Eifelio bokštas, Luvro muziejus, Monmartras\n• Plaukimas Senos upe laivu\n• Prancūziškos konditerijos degustacija')">
+                <td class="p-3 font-semibold">Prancūzija</td><td class="p-3">Paryžius</td><td class="p-3">4 d.</td><td class="p-3">Pusryčiai</td><td class="p-3 text-emerald-600 font-bold">450 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Japonija: Tokijas', 'Programoje:\n• Modernaus Tokijo ir istorinio Kioto lankymas\n• Važiavimas greituoju traukiniu Shinkansen\n• Tradicinė arbatos gėrimo ceremonija')">
+                <td class="p-3 font-semibold">Japonija</td><td class="p-3">Tokijas</td><td class="p-3">10 d.</td><td class="p-3">Pusryčiai</td><td class="p-3 text-emerald-600 font-bold">1299 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Tailandas: Bankokas', 'Programoje:\n• Šventyklų lankymas ir plaukiojantys turgūs\n• Poilsis Puketo arba Koh Samui salų kurortuose\n• Exotinių vaisių bei vietinės virtuvės pažinimas')">
+                <td class="p-3 font-semibold">Tailandas</td><td class="p-3">Bankokas</td><td class="p-3">12 d.</td><td class="p-3">Pusryčiai</td><td class="p-3 text-emerald-600 font-bold">980 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Egiptas: Hurgada', 'Programoje:\n• Poilsis 5* viešbutyje prie Raudonosios jūros\n• Nardymas ir skraidymas parašiutu virš jūros\n• Ekskursija į Kairą bei Gizos piramides')">
+                <td class="p-3 font-semibold">Egiptas</td><td class="p-3">Hurgada</td><td class="p-3">7 d.</td><td class="p-3">Viskas įskaičiuota</td><td class="p-3 text-emerald-600 font-bold">420 €</td>
+              </tr>
+              <tr class="clickable-row" onclick="openModal('Norvegija: Bergenas', 'Programoje:\n• Kruizas giliausiais ir gražiausiais fiordais\n• Kelionė garsiuoju Flåm geležinkeliu\n• Žygiai į kalnus ir kalnų viršūnių panoramos')">
+                <td class="p-3 font-semibold">Norvegija</td><td class="p-3">Bergenas</td><td class="p-3">6 d.</td><td class="p-3">Pusryčiai</td><td class="p-3 text-emerald-600 font-bold">670 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Šoninis skydelis -->
+    <aside class="space-y-6 w-full lg:col-span-1">
+      <!-- TURIZMO ŽEMĖLAPIŲ SKAITYMAS (JAPONIJA) -->
+      <div onclick="openModal('Žemėlapių Skaitymas: Japonija 🗾', 'Kaip suprasti Japonijos turizmo žemėlapius ir simbolius:\n\n⛩️ Šintoistų šventykla (Jinja)\n卍 Budistų šventykla (Tera) - Nesusimaišykite su kitu simboliu!\n♨️ Karštosios versmės (Onsen)\n🛑 Policijos postas (Koban) - čia visada rasite pagalbą pasiklydus\n\nPatarimas: Japonijoje maršrutai orientuoti pagal metro išėjimus (pvz., West Exit 3), o ne gatvių pavadinimus.')" class="interactive-card bg-emerald-800 text-white p-5 rounded-lg shadow-sm border w-full space-y-2">
+        <h3 class="font-bold text-lg">Žemėlapių Gidas: Japonija 🗾 ➔</h3>
+        <p class="opacity-90 text-sm">Spustelėkite čia ir sužinokite, ką reiškia unikalūs simboliai Japonijos žemėlapiuose.</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full space-y-3">
+        <h3 class="font-bold text-base sm:text-lg text-emerald-900 border-b pb-1">Naujienos ir Patarimai</h3>
+        
+        <div onclick="openModal('Bilietų Pirkimas', 'Rekomenduojame skrydžių bilietus užsakyti prieš 2-3 mėnesius iki kelionės pradžios.\n\nTaip pat geriausios kainos dažniausiai pasiekiamos antradienio ir trečiadienio popietėmis.')" class="cursor-pointer hover:text-emerald-700 transition">
+          <p class="text-xs font-bold">Kada geriausia pirkti bilietus?</p>
+          <p class="text-[11px] text-gray-500">Skaityti daugiau ➔</p>
+        </div>
+
+        <div onclick="openModal('Dokumentų Ruošimas', 'Svarbu: Jūsų pasas ar ID kortelė turi galioti bent 6 mėnesius po numatomo kelionės pabaigos datos.\n\nAtkreipkite dėmesį į Šengeno zonos ir trečiųjų šalių vizų reikalavimus.')" class="cursor-pointer hover:text-emerald-700 transition">
+          <p class="text-xs font-bold">Dokumentų ruošimas</p>
+          <p class="text-[11px] text-gray-500">Skaityti daugiau ➔</p>
+        </div>
+
+        <div onclick="openModal('Sveikatos Draudimas', 'Keliaujant užsienyje būtina turėti galiojantį medicininių išlaidų draudimą.\n\nTai apsaugos jus nuo nenumatytų išlaidų susirgus ar patyrus traumą.')" class="cursor-pointer hover:text-emerald-700 transition">
+          <p class="text-xs font-bold">Kodėl svarbus kelionės draudimas?</p>
+          <p class="text-[11px] text-gray-500">Skaityti daugiau ➔</p>
+        </div>
+      </div>
+
+      <!-- ORAI VISUOSE LENTELĖS MIESTUOSE -->
+      <div class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full space-y-3">
+        <h3 class="font-bold text-lg text-emerald-900 border-b pb-1">☀️ Orai Kryptyse</h3>
+        <p class="text-xs text-gray-600">Esama prognozė visoms kelionių kryptims:</p>
+
+        <div class="space-y-2 text-xs">
+          <div onclick="openModal('Orai: Italija (Roma)', 'Roma, Italija:\n☀️ +24°C, Giedra ir saulėta\nJūros vandens temp: +21°C')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇮🇹 Roma</span>
+            <span class="text-emerald-800 font-bold">☀️ +24°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Ispanija (Barselona)', 'Barselona, Ispanija:\n⛅ +22°C, Lengvai debesuota\nJūros vandens temp: +20°C')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇪🇸 Barselona</span>
+            <span class="text-emerald-800 font-bold">⛅ +22°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Graikija (Atėnai)', 'Atėnai, Graikija:\n☀️ +26°C, Saulėta ir karšta\nJūros vandens temp: +22°C')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇬🇷 Atėnai</span>
+            <span class="text-emerald-800 font-bold">☀️ +26°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Prancūzija (Paryžius)', 'Paryžius, Prancūzija:\n🌤️ +19°C, Dalis debesų, be lietaus')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇫🇷 Paryžius</span>
+            <span class="text-emerald-800 font-bold">🌤️ +19°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Japonija (Tokijas)', 'Tokijas, Japonija:\n☀️ +21°C, Maloni šiluma')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇯🇵 Tokijas</span>
+            <span class="text-emerald-800 font-bold">☀️ +21°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Tailandas (Bankokas)', 'Bankokas, Tailandas:\n🌤️ +32°C, Tropinis karštis\nJūros vandens temp: +28°C')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇹🇭 Bankokas</span>
+            <span class="text-emerald-800 font-bold">🌤️ +32°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Egiptas (Hurgada)', 'Hurgada, Egiptas:\n☀️ +30°C, Giedra ir saulėta\nJūros vandens temp: +26°C')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇪🇬 Hurgada</span>
+            <span class="text-emerald-800 font-bold">☀️ +30°C</span>
+          </div>
+
+          <div onclick="openModal('Orai: Norvegija (Bergenas)', 'Bergenas, Norvegija:\n🌧️ +14°C, Nedidelis lietus')" class="flex justify-between items-center p-2 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+            <span class="font-semibold">🇳🇴 Bergenas</span>
+            <span class="text-emerald-800 font-bold">🌧️ +14°C</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atsiliepimai -->
+      <div class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full space-y-2">
+        <h3 class="font-bold text-base text-emerald-900 border-b pb-1">💬 Klientų Atsiliepimai</h3>
+        
+        <div onclick="openModal('Atsiliepimas: Rasa M.', '„Nuostabi kelionė į Romą! Viskas suorganizuota be jokių rūpesčių. Viešbutis buvo puikioje vietoje, o gidas labai atsidavęs.“')" class="cursor-pointer hover:bg-emerald-50 p-1.5 rounded transition">
+          <p class="text-xs text-gray-600 italic">„Nuostabi kelionė į Romą! Viskas suorganizuota be jokių rūpesčių.“</p>
+          <span class="text-[11px] text-emerald-700 font-semibold block text-right">— Rasa M. ⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div onclick="openModal('Atsiliepimas: Mantas K.', '„Ačiū už puikų maršrutą Ispanijoje. Viešbutis pranoko lūkesčius, o rekomenduoti restoranai buvo nuostabūs!“')" class="border-t pt-2 cursor-pointer hover:bg-emerald-50 p-1.5 rounded transition">
+          <p class="text-xs text-gray-600 italic">„Ačiū už puikų maršrutą Ispanijoje. Viešbutis pranoko lūkesčius!“</p>
+          <span class="text-[11px] text-emerald-700 font-semibold block text-right">— Mantas K. ⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div onclick="openModal('Atsiliepimas: Dovilė S.', '„Egzotiška kelionė į Tailandą buvo geriausios mano atostogos life! Ačiū už puikią organizaciją ir sklandų pervežimą.“')" class="border-t pt-2 cursor-pointer hover:bg-emerald-50 p-1.5 rounded transition">
+          <p class="text-xs text-gray-600 italic">„Kelionė į Tailandą buvo geriausios mano atostogos life!“</p>
+          <span class="text-[11px] text-emerald-700 font-semibold block text-right">— Dovilė S. ⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div onclick="openModal('Atsiliepimas: Tomas B.', '„Aukščiausia klasė organizuojant verslo komandiruotę į Japoniją. Visi skrydžiai ir pervežimai laiku.“')" class="border-t pt-2 cursor-pointer hover:bg-emerald-50 p-1.5 rounded transition">
+          <p class="text-xs text-gray-600 italic">„Aukščiausia klasė organizuojant verslo komandiruotę.“</p>
+          <span class="text-[11px] text-emerald-700 font-semibold block text-right">— Tomas B. ⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div onclick="openModal('Atsiliepimas: Inga V.', '„Atėnai sužavėjo! Ekskursijos po antikinį paveldą ir kruizas po salas paliko nepakartojama įspūdį.“')" class="border-t pt-2 cursor-pointer hover:bg-emerald-50 p-1.5 rounded transition">
+          <p class="text-xs text-gray-600 italic">„Atėnai sužavėjo! Kruizas po salas paliko neišdildomą įspūdį.“</p>
+          <span class="text-[11px] text-emerald-700 font-semibold block text-right">— Inga V. ⭐⭐⭐⭐⭐</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Modalinis langas -->
+  <div id="info-modal" class="fixed inset-0 bg-black/70 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full text-center space-y-4 shadow-xl">
+      <h3 id="modal-title" class="text-xl font-bold text-emerald-800"></h3>
+      <p id="modal-text" class="text-gray-700 whitespace-pre-line leading-relaxed text-sm sm:text-base text-left"></p>
+      <button onclick="closeModal()" class="bg-emerald-600 text-white px-6 py-2 rounded font-bold hover:bg-emerald-700 transition w-full sm:w-auto">Uždaryti</button>
+    </div>
+  </div>
+
+  <footer class="bg-gray-800 text-gray-200 py-4 text-center mt-auto w-full px-4">
+    <div class="max-w-7xl mx-auto"><p>© 2026 Turizmo Portalas. Visos teisės saugomos.</p></div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() { 
+      document.getElementById('nav-menu').classList.toggle('hidden'); 
+    }
+
+    function openModal(t, txt) { 
+      document.getElementById('modal-title').innerText = t; 
+      document.getElementById('modal-text').innerText = txt; 
+      document.getElementById('info-modal').classList.remove('hidden'); 
+    }
+
+    function closeModal() { 
+      document.getElementById('info-modal').classList.add('hidden'); 
+    }
+
+    function showChartInfo(m, c) { 
+      openModal(`Statistika: ${m}`, `Mėnesio keliautojų skaičius: ${c} asm.\n\nTai sudaro svarbią sezono turizmo dalį.`); 
+    }
+  </script>
+</body>
+</html>

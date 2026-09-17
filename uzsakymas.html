@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="lt" class="h-full m-0 p-0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turizmas - Užsakymas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { overflow-y: scroll; }
+    html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 100%; }
+    #main-logo { letter-spacing: 1px; }
+    .sticky-header { position: sticky; top: 0; z-index: 50; }
+    .font-sm { font-size: 14px; } .font-md { font-size: 16px; } .font-lg { font-size: 18px; }
+  </style>
+</head>
+<body id="app-body" class="bg-gray-50 text-gray-800 font-md flex flex-col min-h-screen m-0 p-0 w-full">
+
+  <!-- HEDERIS -->
+  <header class="sticky-header bg-emerald-700 text-white shadow-md w-full px-4 sm:px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
+      <h1 id="main-logo" onclick="toggleHeaderGlow(this)" class="text-xl sm:text-2xl font-bold cursor-pointer transition-all duration-300">
+        🌍 Turizmas: Kelionių Oazė
+      </h1>
+      <button onclick="toggleMobileMenu()" class="md:hidden text-white focus:outline-none p-2 text-2xl" aria-label="Meniu">☰</button>
+
+      <nav id="nav-menu" class="hidden md:block w-full md:w-auto mt-4 md:mt-0">
+        <ul class="flex flex-col md:flex-row gap-3 md:gap-8 font-medium text-base">
+          <li><a href="turizmas.html" class="hover:underline block py-1">Pagrindinis</a></li>
+          <li><a href="apie.html" class="hover:underline block py-1">Apie mus</a></li>
+          <li><a href="galerija.html" class="hover:underline block py-1">Galerija</a></li>
+          <li><a href="uzsakymas.html" class="underline font-bold block py-1">Užsakymas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGRINDINIO TURINIO KONTEINERIS -->
+  <div class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    
+    <main class="lg:col-span-3 space-y-6 w-full">
+      
+      <!-- KAIP VYKS UŽSAKYMAS (3 Žingsniai) -->
+      <div class="bg-emerald-800 text-white p-5 rounded-lg shadow-sm w-full">
+        <h3 class="text-lg font-bold mb-3 text-center sm:text-left">Kaip vyksta užsakymo procesas? 🗺️</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm text-center sm:text-left">
+          
+          <div id="step-card-1" class="bg-emerald-900/60 p-3 rounded border border-emerald-600/40 relative transition-all duration-300">
+            <button id="step-back-1" onclick="resetStep(1)" class="hidden absolute top-2 right-2 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-[10px] font-bold transition">⬅ Atgal</button>
+            <div id="step-content-1" onclick="interactStep(1)" class="cursor-pointer">
+              <span class="bg-emerald-500 text-white font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">1 Žingsnis</span>
+              <p class="font-bold text-emerald-100">Užpildykite Formą</p>
+              <p class="text-emerald-200 text-xs mt-1">Pasirinkite šalį, datą ir įveskite savo kontaktus.</p>
+            </div>
+          </div>
+
+          <div id="step-card-2" class="bg-emerald-900/60 p-3 rounded border border-emerald-600/40 relative transition-all duration-300">
+            <button id="step-back-2" onclick="resetStep(2)" class="hidden absolute top-2 right-2 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-[10px] font-bold transition">⬅ Atgal</button>
+            <div id="step-content-2" onclick="interactStep(2)" class="cursor-pointer">
+              <span class="bg-emerald-500 text-white font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">2 Žingsnis</span>
+              <p class="font-bold text-emerald-100">Patvirtinimas ir Avansas</p>
+              <p class="text-emerald-200 text-xs mt-1">Gaukite sąskaitą el. paštu ir apmokėkite 20% avansą.</p>
+            </div>
+          </div>
+
+          <div id="step-card-3" class="bg-emerald-900/60 p-3 rounded border border-emerald-600/40 relative transition-all duration-300">
+            <button id="step-back-3" onclick="resetStep(3)" class="hidden absolute top-2 right-2 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-[10px] font-bold transition">⬅ Atgal</button>
+            <div id="step-content-3" onclick="interactStep(3)" class="cursor-pointer">
+              <span class="bg-emerald-500 text-white font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">3 Žingsnis</span>
+              <p class="font-bold text-emerald-100">Bilietai Jūsų Pašte</p>
+              <p class="text-emerald-200 text-xs mt-1">Likę dokumentai ir skrydžio bilietai atkeliauja el. paštu.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- KELIONĖS SKAIČIUOKLĖ -->
+      <div id="card-calc" class="bg-white p-5 sm:p-6 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-calc" onclick="resetCard('card-calc', 'content-calc', 'back-calc', 'calc')" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2.5 py-1 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-calc" onclick="flipCard('card-calc', 'content-calc', 'back-calc', 'calc')" class="cursor-pointer">
+          <h2 class="text-xl sm:text-2xl font-bold text-emerald-800 mb-2">Kelionės Skaičiuoklė</h2>
+          <p class="text-xs sm:text-sm text-gray-600 mb-4">Pasirinkite šalį ir parametrus preliminariai sąmatai apskaičiuoti.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+          <div>
+            <label class="block text-xs font-semibold mb-1">Kryptis:</label>
+            <select id="calc-dest" onchange="calculateTotal()" class="w-full p-2 border rounded text-black text-xs sm:text-sm">
+              <option value="499">Italija (Roma) — 499 €</option>
+              <option value="399">Ispanija (Barselona) — 399 €</option>
+              <option value="549">Graikija (Atėnai) — 549 €</option>
+              <option value="450">Prancūzija (Paryžius) — 450 €</option>
+              <option value="1299">Japonija (Tokijas) — 1299 €</option>
+              <option value="980">Tailandas (Bankokas) — 980 €</option>
+              <option value="420">Egiptas (Hurgada) — 420 €</option>
+              <option value="670">Norvegija (Bergenas) — 670 €</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">Asmenų skaičius:</label>
+            <input type="number" id="calc-people" min="1" max="10" value="1" onchange="calculateTotal()" onkeyup="calculateTotal()" class="w-full p-2 border rounded text-black text-xs sm:text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">Maitinimas:</label>
+            <select id="calc-food" onchange="calculateTotal()" class="w-full p-2 border rounded text-black text-xs sm:text-sm">
+              <option value="0">Pusryčiai (+0 €/asm.)</option>
+              <option value="100">Pusryčiai ir vakarienė (+100 €/asm.)</option>
+              <option value="200">Viskas įskaičiuota (+200 €/asm.)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-emerald-50 p-4 rounded border flex justify-between items-center text-gray-800">
+          <div>
+            <span class="font-bold text-emerald-900 text-sm sm:text-base block">Bendra Suma:</span>
+            <span class="text-xs text-gray-500">Galutinė kaina be papildomų paslaugų</span>
+          </div>
+          <span id="calc-result" class="text-xl sm:text-2xl font-extrabold text-emerald-700">499 €</span>
+        </div>
+      </div>
+
+      <!-- UŽSAKYMO FORMA -->
+      <div id="card-form" class="bg-white p-5 sm:p-6 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-form" onclick="resetCard('card-form', 'content-form', 'back-form', 'form')" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2.5 py-1 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-form" onclick="flipCard('card-form', 'content-form', 'back-form', 'form')" class="cursor-pointer mb-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-emerald-800">Užsakymo Registracija</h2>
+          <p class="text-xs text-gray-500">Paspauskite čia papildomai informacijai pamatyti</p>
+        </div>
+        
+        <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block mb-1 font-medium text-xs sm:text-sm">Vardas, Pavardė:*</label>
+              <input type="text" id="form-name" class="w-full border p-2 rounded text-black text-xs sm:text-sm">
+            </div>
+            <div>
+              <label class="block mb-1 font-medium text-xs sm:text-sm">El. Paštas:*</label>
+              <input type="email" id="form-email" class="w-full border p-2 rounded text-black text-xs sm:text-sm">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block mb-1 font-medium text-xs sm:text-sm">Telefonas:*</label>
+              <input type="tel" id="form-phone" class="w-full border p-2 rounded text-black text-xs sm:text-sm">
+            </div>
+            <div>
+              <label class="block mb-1 font-medium text-xs sm:text-sm">Planuojama Data:*</label>
+              <input type="date" id="form-date" required class="w-full border p-2 rounded text-black text-xs sm:text-sm">
+            </div>
+            <div>
+              <label class="block mb-1 font-medium text-xs sm:text-sm">Pasirinkite Šalį:*</label>
+              <select id="form-dest" class="w-full border p-2 rounded text-black text-xs sm:text-sm">
+                <option value="Italija (Roma)">Italija (Roma)</option>
+                <option value="Ispanija (Barselona)">Ispanija (Barselona)</option>
+                <option value="Graikija (Atėnai)">Graikija (Atėnai)</option>
+                <option value="Prancūzija (Paryžius)">Prancūzija (Paryžius)</option>
+                <option value="Japonija (Tokijas)">Japonija (Tokijas)</option>
+                <option value="Tailandas (Bankokas)">Tailandas (Bankokas)</option>
+                <option value="Egiptas (Hurgada)">Egiptas (Hurgada)</option>
+                <option value="Norvegija (Bergenas)">Norvegija (Bergenas)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="p-4 bg-gray-50 border rounded-lg space-y-2">
+            <label class="block font-bold text-xs sm:text-sm text-emerald-900 mb-1">Papildomos Paslaugos Užsakymui:</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="srv-insurance" class="rounded text-emerald-600 focus:ring-emerald-500">
+                <span>Medicininių išlaidų draudimas (+15 €)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="srv-cancel" class="rounded text-emerald-600 focus:ring-emerald-500">
+                <span>Lankstus atšaukimas be baudų (+25 €)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="srv-transfer" class="rounded text-emerald-600 focus:ring-emerald-500">
+                <span>Privatus pervežimas oro uoste (+30 €)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="srv-seats" class="rounded text-emerald-600 focus:ring-emerald-500">
+                <span>Vietų pasirinkimas lėktuve (+10 €)</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block mb-1 font-medium text-xs sm:text-sm">Papildomi Pageidavimai:</label>
+            <textarea id="form-notes" rows="3" class="w-full border p-2 rounded text-black text-xs sm:text-sm"></textarea>
+          </div>
+
+          <button type="submit" class="bg-emerald-600 text-white px-6 py-2.5 rounded font-bold hover:bg-emerald-700 transition w-full sm:w-auto text-sm">Pateikti Užsakymą 🚀</button>
+        </form>
+      </div>
+
+      <!-- GARANTIJŲ IR SĄLYGŲ BLOKAS -->
+      <div id="card-guar" class="bg-white p-5 sm:p-6 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-guar" onclick="resetGuarCard()" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2.5 py-1 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-guar" class="space-y-3">
+          <div class="flex items-center justify-between border-b pb-2 mb-3">
+            <h3 class="text-lg font-bold text-emerald-900">Užsakymo Garantijos ir Sąlygos 📋</h3>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div id="guar-box-1" onclick="interactGuarBox(1)" class="p-3 bg-gray-50 rounded border cursor-pointer hover:bg-emerald-50 transition">
+              <h4 class="font-bold text-emerald-800 mb-1">⚡ Momentinis Patvirtinimas</h4>
+              <p class="text-gray-600">Pateikus formą, rezervacijos patvirtinimą ir sąskaitą el. paštu gausite per 15 minučių.</p>
+            </div>
+            <div id="guar-box-2" onclick="interactGuarBox(2)" class="p-3 bg-gray-50 rounded border cursor-pointer hover:bg-emerald-50 transition">
+              <h4 class="font-bold text-emerald-800 mb-1">🔒 Saugus Avansas</h4>
+              <p class="text-gray-600">Užsakymui užtvirtinti užtenka tik 20% avanso, o likusį mokėjimą galite atlikti prieš kelionę.</p>
+            </div>
+            <div id="guar-box-3" onclick="interactGuarBox(3)" class="p-3 bg-gray-50 rounded border cursor-pointer hover:bg-emerald-50 transition">
+              <h4 class="font-bold text-emerald-800 mb-1">📅 Nemokamas Keitimas</h4>
+              <p class="text-gray-600">Likus 14 dienų iki skrydžio, užsakymo datas ar keliautojų duomenis keiskite be jokio papildomo mokesčio.</p>
+            </div>
+            <div id="guar-box-4" onclick="interactGuarBox(4)" class="p-3 bg-gray-50 rounded border cursor-pointer hover:bg-emerald-50 transition">
+              <h4 class="font-bold text-emerald-800 mb-1">🛡️ Pinigų Grąžinimo Garantija</h4>
+              <p class="text-gray-600">Jei kelionė atšaukiama dėl organizatoriaus kaltės, 100% sumos grąžinama per 3 darbo dienas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ŠONINĖ JUOSTA (ASIDE) -->
+    <aside class="space-y-6 w-full lg:col-span-1">
+
+      <!-- MOKĖJIMO BŪDAI -->
+      <div id="card-pay" class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-pay" onclick="resetCard('card-pay', 'content-pay', 'back-pay', 'pay')" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-pay" onclick="flipCard('card-pay', 'content-pay', 'back-pay', 'pay')" class="cursor-pointer space-y-3">
+          <h3 class="font-bold text-base text-emerald-900 border-b pb-1">Saugūs Mokėjimo Būdai 🔒</h3>
+          <p class="text-xs text-gray-600">Atsiskaitykite jums patogiausiu ir saugiausiu būdu:</p>
+          <div class="grid grid-cols-2 gap-2 text-center text-xs">
+            <div class="bg-gray-100 p-2 rounded font-semibold text-gray-700">🏦 El. Bankininkystė</div>
+            <div class="bg-gray-100 p-2 rounded font-semibold text-gray-700">💳 Visa / MasterCard</div>
+            <div class="bg-gray-100 p-2 rounded font-semibold text-gray-700">📱 Apple / Google Pay</div>
+            <div class="bg-gray-100 p-2 rounded font-semibold text-gray-700">📄 Bankinis Pavedimas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAGAŽO GIDAS -->
+      <div id="card-bag" class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-bag" onclick="resetBagCard()" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-bag" class="space-y-3">
+          <h3 class="font-bold text-base text-emerald-900 border-b pb-1">Kas Įskaičiuota Skrydyje? 🧳</h3>
+          <ul class="text-xs text-gray-600 space-y-2">
+            <li id="bag-row-1" onclick="interactBagRow(1)" class="flex items-center justify-between p-1.5 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+              <span>🎒 Rankinis bagažas (40x30x20)</span>
+              <span class="font-bold text-emerald-700">TAIP</span>
+            </li>
+            <li id="bag-row-2" onclick="interactBagRow(2)" class="flex items-center justify-between p-1.5 bg-emerald-50 rounded border border-emerald-100 cursor-pointer hover:bg-emerald-100 transition">
+              <span>🧳 Lagaminas į saloną (iki 10 kg)</span>
+              <span class="font-bold text-emerald-700">TAIP</span>
+            </li>
+            <li id="bag-row-3" onclick="interactBagRow(3)" class="flex items-center justify-between p-1.5 bg-gray-50 rounded border border-gray-200 cursor-pointer hover:bg-gray-100 transition">
+              <span>🛄 Registruotas bagažas (20 kg)</span>
+              <span class="font-bold text-amber-600">+25 €</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KAS VYKSTA PO UŽSAKYMO? -->
+      <div id="card-after" class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-after" onclick="resetAfterCard()" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-after" class="space-y-3">
+          <h3 class="font-bold text-base text-emerald-900 border-b pb-1">Kas Vyksta Po Užsakymo? 📩</h3>
+          <ul class="text-xs text-gray-600 space-y-2">
+            <li id="after-row-1" onclick="interactAfterRow(1)" class="flex items-start gap-2 p-1.5 rounded cursor-pointer hover:bg-gray-50 transition">
+              <span class="text-emerald-600 font-bold">1.</span>
+              <span><b>El. pašto patvirtinimas:</b> Gausite rezervacijos kopiją su avanso sąskaita per 15 min.</span>
+            </li>
+            <li id="after-row-2" onclick="interactAfterRow(2)" class="flex items-start gap-2 p-1.5 rounded cursor-pointer hover:bg-gray-50 transition">
+              <span class="text-emerald-600 font-bold">2.</span>
+              <span><b>Sutarties pasirašymas:</b> Sutartis patvirtinama elektroniniu būdu vienu paspaudimu.</span>
+            </li>
+            <li id="after-row-3" onclick="interactAfterRow(3)" class="flex items-start gap-2 p-1.5 rounded cursor-pointer hover:bg-gray-50 transition">
+              <span class="text-emerald-600 font-bold">3.</span>
+              <span><b>Gaukite bilietus:</b> Skrydžio bilietai ir vaučeriai atsiunčiami likus 7 dienoms iki kelionės.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DAŽNIAUSIAI UŽDUODAMI KLAUSIMAI (DUK) -->
+      <div id="card-faq" class="bg-white p-5 rounded-lg shadow-sm border bg-card w-full relative transition-all duration-300">
+        <button id="back-faq" onclick="resetFaqCard()" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-faq" class="space-y-3">
+          <h3 class="font-bold text-base text-emerald-900 border-b pb-1">Dažni Klausimai ❓</h3>
+          <div class="space-y-2 text-xs">
+            <div id="faq-item-1" onclick="interactFaqItem(1)" class="p-2 bg-gray-50 rounded border cursor-pointer hover:bg-emerald-50 transition">
+              <p class="font-bold text-gray-700">Kada reikia sumokėti likusį avansą?</p>
+              <p class="text-gray-500">Likusi suma mokama likus ne mažiau kaip 21 d. iki skrydžio.</p>
+            </div>
+            <div id="faq-item-2" onclick="interactFaqItem(2)" class="p-2 bg-gray-50 rounded border cursor-pointer hover:bg-emerald-50 transition">
+              <p class="font-bold text-gray-700">Ar galima keisti keliautojus?</p>
+              <p class="text-gray-500">Taip, pavardės keitimas nemokamas likus 14 d. iki skrydžio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRUPIŲ NUOLAIDA -->
+      <div id="card-group" class="bg-gradient-to-br from-emerald-800 to-emerald-900 text-white p-6 rounded-xl shadow-md border border-emerald-700/60 relative transition-all duration-300">
+        <button id="back-group" onclick="resetCard('card-group', 'content-group', 'back-group', 'group')" class="hidden absolute top-3 right-3 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+        <div id="content-group" onclick="flipCard('card-group', 'content-group', 'back-group', 'group')" class="cursor-pointer space-y-0">
+          <div class="flex flex-col sm:flex-row items-start justify-between gap-3 border-b border-emerald-700/60 pb-3">
+            <div class="flex items-center space-x-3">
+              <span class="text-2xl p-2 bg-emerald-700/50 rounded-lg">👥</span>
+              <div>
+                <h3 class="font-bold text-base md:text-lg leading-snug">
+                  Keliaujate su grupe, šeima ar kolegomis?
+                </h3>
+              </div>
+            </div>
+            <span class="bg-[#346650] text-[#71D6A6] text-xs font-bold px-2.5 py-1 rounded-full border border-[#488267]">
+              -10% NUOLAIDA
+            </span>
+          </div>
+
+          <div class="space-y-3 text-xs text-emerald-100/90 leading-relaxed">
+            <p>
+              Planuojate didesnę išvyką? Mes pasirūpinsime, kad jūsų grupės kelionė būtų patogi ir nekeltų papildomų rūpesčių. Užsakant kelionę <b>5 ar daugiau asmenų kompanijai</b>, pritaikysite <b>10% nuolaidą</b> visam užsakymui!
+            </p>
+          </div>
+
+          <div class="pt-2 text-[12px] space-y-2">
+            <div class="flex items-center space-x-2 bg-emerald-800/80 p-2.5 rounded-md border border-emerald-700">
+              <span>✉️</span>
+              <span class="text-emerald-200">El. paštas grupių užsakymams:</span>
+              <a class="font-bold text-white">
+                grupems@turizmas.lt
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- MODALINIS LANGAS -->
+  <div id="info-modal" class="fixed inset-0 bg-black/70 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full text-center space-y-4 shadow-xl">
+      <h3 id="modal-title" class="text-lg sm:text-xl font-bold text-emerald-800"></h3>
+      <p id="modal-text" class="text-gray-700 text-xs sm:text-sm whitespace-pre-line leading-relaxed text-left"></p>
+      <button onclick="closeModal()" class="bg-emerald-600 text-white px-6 py-2 rounded font-bold hover:bg-emerald-700 transition text-sm">Uždaryti</button>
+    </div>
+  </div>
+
+  <!-- FUTARIS -->
+  <footer id="card-footer" class="bg-gray-800 text-gray-200 py-4 text-center text-xs sm:text-sm mt-auto w-full px-4 relative transition-all duration-300">
+    <button id="back-footer" onclick="resetCard('card-footer', 'content-footer', 'back-footer', 'footer')" class="hidden absolute top-2 right-4 text-white bg-gray-700 hover:bg-gray-600 px-2 py-0.5 rounded text-xs font-bold transition z-20">⬅ Atgal</button>
+    <div id="content-footer" onclick="flipCard('card-footer', 'content-footer', 'back-footer', 'footer')" class="cursor-pointer">
+      <div class="max-w-7xl mx-auto"><p>© 2026 Turizmo Portalas. Visos teisės saugomos.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() { 
+      document.getElementById('nav-menu').classList.toggle('hidden'); 
+    }
+
+    function calculateTotal() {
+      const basePrice = parseInt(document.getElementById('calc-dest').value) || 0;
+      const count = parseInt(document.getElementById('calc-people').value) || 1;
+      const foodPrice = parseInt(document.getElementById('calc-food').value) || 0;
+      document.getElementById('calc-result').innerText = ((basePrice + foodPrice) * count) + " €";
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('form-name').value;
+      const dest = document.getElementById('form-dest').value;
+      openModal("Užsakymas Priimtas! 🎉", `Ačiū, ${name}.\nJūsų kelionės užsakymas į kryptį „${dest}“ sėkmingai gautas!\n\nPatvirtinimo laišką bei sąskaitą avansui išsiuntėme nurodytu el. paštu.`);
+      document.getElementById('booking-form').reset();
+    }
+
+    function openModal(t, txt) { 
+      document.getElementById('modal-title').innerText = t; 
+      document.getElementById('modal-text').innerText = txt; 
+      document.getElementById('info-modal').classList.remove('hidden'); 
+    }
+
+    function closeModal() { 
+      document.getElementById('info-modal').classList.add('hidden'); 
+    }
+
+    function toggleHeaderGlow(el) {
+      el.classList.toggle('text-yellow-300');
+      el.classList.toggle('scale-105');
+    }
+
+    // 3 žingsnių logika
+    const stepDataStore = {};
+
+    function interactStep(num) {
+      event.stopPropagation();
+      const cardEl = document.getElementById(`step-card-${num}`);
+      const backBtn = document.getElementById(`step-back-${num}`);
+
+      if (!stepDataStore[num]) {
+        stepDataStore[num] = cardEl.innerHTML;
+      }
+
+      backBtn.classList.remove('hidden');
+
+      let newInfo = "";
+      if(num === 1) {
+        newInfo = `<div class="p-2"><span class="bg-emerald-500 text-white font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">1 Žingsnis</span><p class="font-bold text-emerald-100">Papildoma info:</p><p class="text-emerald-200 text-xs mt-1">Formoje galite nurodyti iki 10 asmenų vienu metu.</p></div>`;
+      } else if(num === 2) {
+        newInfo = `<div class="p-2"><span class="bg-emerald-500 text-white font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">2 Žingsnis</span><p class="font-bold text-emerald-100">Apmokėjimo detalių info:</p><p class="text-emerald-200 text-xs mt-1">Avansą galima sumokėti per 24 valandas nuo sąskaitos gavimo.</p></div>`;
+      } else if(num === 3) {
+        newInfo = `<div class="p-2"><span class="bg-emerald-500 text-white font-bold px-2 py-0.5 rounded-full text-xs inline-block mb-1">3 Žingsnis</span><p class="font-bold text-emerald-100">Bilietų info:</p><p class="text-emerald-200 text-xs mt-1">Taip pat gausite tiesioginį nuorodų rinkinį į oro uosto gidus.</p></div>`;
+      }
+
+      cardEl.innerHTML = `<button id="step-back-${num}" onclick="resetStep(${num})" class="absolute top-2 right-2 text-white bg-emerald-700 hover:bg-emerald-600 px-2 py-0.5 rounded text-[10px] font-bold transition z-20">⬅ Atgal</button>` + newInfo;
+    }
+
+    function resetStep(num) {
+      event.stopPropagation();
+      const cardEl = document.getElementById(`step-card-${num}`);
+      if (stepDataStore[num]) {
+        cardEl.innerHTML = stepDataStore[num];
+      }
+    }
+
+    // Bagažo gido kortelės atskira atmintis ir grąžinimas
+    let bagOriginalHTML = null;
+
+    function interactBagRow(rowNum) {
+      event.stopPropagation();
+      const contentBag = document.getElementById('content-bag');
+      const backBagBtn = document.getElementById('back-bag');
+
+      if (!bagOriginalHTML) {
+        bagOriginalHTML = contentBag.innerHTML;
+      }
+
+      backBagBtn.classList.remove('hidden');
+
+      let extraDesc = "";
+      if(rowNum === 1) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">🎒 Rankinio bagažo taisyklės</h4><p class="text-xs text-gray-600">Nemokamai galite vežtis kuprinę arba rankinę, telpančią po sėdyne (40x30x20 cm). Maksimalus svoris – 8 kg.</p></div>`;
+      } else if(rowNum === 2) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">🧳 Salono lagamino taisyklės</h4><p class="text-xs text-gray-600">Lagaminas su ratukais (iki 10 kg, išmatavimai 55x40x20 cm) keliauja viršutinėje lentynoje. Įskaičiuota į jūsų bilietą!</p></div>`;
+      } else if(rowNum === 3) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">🛄 Registruoto bagažo taisyklės</h4><p class="text-xs text-gray-600">Registruotas lagaminas iki 20 kg priduodamas registracijos stalo metu. Speciali kaina užsakant iš anksto – tik 25 €.</p></div>`;
+      }
+
+      contentBag.innerHTML = `<h3 class="font-bold text-base text-emerald-900 border-b pb-1">Bagažo Detalės 🧳</h3>` + extraDesc;
+    }
+
+    function resetBagCard() {
+      event.stopPropagation();
+      const contentBag = document.getElementById('content-bag');
+      const backBagBtn = document.getElementById('back-bag');
+
+      if (bagOriginalHTML) {
+        contentBag.innerHTML = bagOriginalHTML;
+      }
+      backBagBtn.classList.add('hidden');
+    }
+
+    // Kas vyksta po užsakymo kortelės atskira atmintis ir grąžinimas
+    let afterOriginalHTML = null;
+
+    function interactAfterRow(rowNum) {
+      event.stopPropagation();
+      const contentAfter = document.getElementById('content-after');
+      const backAfterBtn = document.getElementById('back-after');
+
+      if (!afterOriginalHTML) {
+        afterOriginalHTML = contentAfter.innerHTML;
+      }
+
+      backAfterBtn.classList.remove('hidden');
+
+      let extraDesc = "";
+      if(rowNum === 1) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">📩 1 Žingsnio Detalės</h4><p class="text-xs text-gray-600">Jei el. laiško nematote pagrindinėje dėžutėje, būtinai patikrinkite „Spam“ arba „Reiklamų“ aplanką.</p></div>`;
+      } else if(rowNum === 2) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">✍️ 2 Žingsnio Detalės</h4><p class="text-xs text-gray-600">Sutarties pasirašymui nereikia jokių spausdinimų – viskas patvirtinama vienu saugiu paspaudimu.</p></div>`;
+      } else if(rowNum === 3) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">✈️ 3 Žingsnio Detalės</h4><p class="text-xs text-gray-600">Skrydžio bilietus ir viešbučio vaučerius atsiųsime likus lygiai 7 dienoms iki išvykimo.</p></div>`;
+      }
+
+      contentAfter.innerHTML = `<h3 class="font-bold text-base text-emerald-900 border-b pb-1">Užsakymo Eigos Paaiškinimas 📩</h3>` + extraDesc;
+    }
+
+    function resetAfterCard() {
+      event.stopPropagation();
+      const contentAfter = document.getElementById('content-after');
+      const backAfterBtn = document.getElementById('back-after');
+
+      if (afterOriginalHTML) {
+        contentAfter.innerHTML = afterOriginalHTML;
+      }
+      backAfterBtn.classList.add('hidden');
+    }
+
+    // Užsakymo garantijų ir sąlygų blokas – atskira atmintis kiekvienam elementui
+    let guarOriginalHTML = null;
+
+    function interactGuarBox(boxNum) {
+      event.stopPropagation();
+      const contentGuar = document.getElementById('content-guar');
+      const backGuarBtn = document.getElementById('back-guar');
+
+      if (!guarOriginalHTML) {
+        guarOriginalHTML = contentGuar.innerHTML;
+      }
+
+      backGuarBtn.classList.remove('hidden');
+
+      let extraDesc = "";
+      if(boxNum === 1) {
+        extraDesc = `<div class="p-4 bg-emerald-50 rounded border border-emerald-200 space-y-2"><h4 class="font-bold text-emerald-800 text-sm">⚡ Momentinio Patvirtinimo Sąlygos</h4><p class="text-xs text-gray-600">Mūsų automatizuota sistema rezervacijas apdoroja akimirksniu, todėl visi duomenys patvirtinami be jokių ilgų laukimų.</p></div>`;
+      } else if(boxNum === 2) {
+        extraDesc = `<div class="p-4 bg-emerald-50 rounded border border-emerald-200 space-y-2"><h4 class="font-bold text-emerald-800 text-sm">🔒 Saugaus Avanso Sąlygos</h4><p class="text-xs text-gray-600">20 procentų avansas yra saugiai laikymo specialioje sąskaitoje iki galutinio kelionės patvirtinimo.</p></div>`;
+      } else if(boxNum === 3) {
+        extraDesc = `<div class="p-4 bg-emerald-50 rounded border border-emerald-200 space-y-2"><h4 class="font-bold text-emerald-800 text-sm">📅 Nemokamo Keitimo Sąlygos</h4><p class="text-xs text-gray-600">Datos keitimas galima neribotą kartų skaičių, jei kreipiatės likus daugiau nei 14 dienų iki skrydžio pradžios.</p></div>`;
+      } else if(boxNum === 4) {
+        extraDesc = `<div class="p-4 bg-emerald-50 rounded border border-emerald-200 space-y-2"><h4 class="font-bold text-emerald-800 text-sm">🛡️ Pinigų Grąžinimo Sąlygos</h4><p class="text-xs text-gray-600">Pinigai pervedami į jūsų nurodytą banko sąskaitą per 3 darbo dienas nuo oficialaus atšaukimo patvirtinimo.</p></div>`;
+      }
+
+      contentGuar.innerHTML = `<h3 class="text-lg font-bold text-emerald-900 mb-3">Garantijos Detalji Informacija 📋</h3>` + extraDesc;
+    }
+
+    function resetGuarCard() {
+      event.stopPropagation();
+      const contentGuar = document.getElementById('content-guar');
+      const backGuarBtn = document.getElementById('back-guar');
+
+      if (guarOriginalHTML) {
+        contentGuar.innerHTML = guarOriginalHTML;
+      }
+      backGuarBtn.classList.add('hidden');
+    }
+
+    // Dažni klausimai (DUK) – atskira atmintis ir grąžinimas
+    let faqOriginalHTML = null;
+
+    function interactFaqItem(faqNum) {
+      event.stopPropagation();
+      const contentFaq = document.getElementById('content-faq');
+      const backFaqBtn = document.getElementById('back-faq');
+
+      if (!faqOriginalHTML) {
+        faqOriginalHTML = contentFaq.innerHTML;
+      }
+
+      backFaqBtn.classList.remove('hidden');
+
+      let extraDesc = "";
+      if(faqNum === 1) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">💡 Avanso Mokėjimo Paaiškinimas</h4><p class="text-xs text-gray-600">Likusią sumą galite sumokėti dalimis arba visa suma iš karto per kliento savitarnos portalą.</p></div>`;
+      } else if(faqNum === 2) {
+        extraDesc = `<div class="p-3 bg-emerald-50 rounded border border-emerald-200 space-y-1"><h4 class="font-bold text-emerald-800 text-sm">💡 Keliautojų Keitimo Paaiškinimas</h4><p class="text-xs text-gray-600">Jei pasikeitė tik rašybos klaida varde, ją galite nemokamai ištaisyti bet kuriuo metu.</p></div>`;
+      }
+
+      contentFaq.innerHTML = `<h3 class="font-bold text-base text-emerald-900 border-b pb-1">DUK Išsamus Atsakymas ❓</h3>` + extraDesc;
+    }
+
+    function resetFaqCard() {
+      event.stopPropagation();
+      const contentFaq = document.getElementById('content-faq');
+      const backFaqBtn = document.getElementById('back-faq');
+
+      if (faqOriginalHTML) {
+        contentFaq.innerHTML = faqOriginalHTML;
+      }
+      backFaqBtn.classList.add('hidden');
+    }
+
+    // Likusių kortelių apvertimo ir grįžimo funkcija
+    const cardDataStore = {};
+
+    function flipCard(cardId, contentId, backBtnId, type) {
+      const contentEl = document.getElementById(contentId);
+      const backBtn = document.getElementById(backBtnId);
+      
+      if (!cardDataStore[cardId]) {
+        cardDataStore[cardId] = contentEl.innerHTML;
+      }
+
+      backBtn.classList.remove('hidden');
+
+      let alternativeContent = "";
+      switch(type) {
+        case 'calc':
+          alternativeContent = `<div class="p-4 text-center space-y-2"><h4 class="font-bold text-emerald-800 text-base">💡 Kainos Garantija</h4><p class="text-xs text-gray-600">Mūsų sistemoje taikoma geriausios kainos garantija – radę pigiau, grąžinsime skirtumą!</p></div>`;
+          break;
+        case 'form':
+          alternativeContent = `<div class="p-4 text-center space-y-2"><h4 class="font-bold text-emerald-800 text-base">📞 Skubi Konsultacija</h4><p class="text-xs text-gray-600">Jei kyla klausimų pildant formą, galite tiesiogiai skambinti mūsų palaikymo linijai.</p></div>`;
+          break;
+        case 'pay':
+          alternativeContent = `<div class="p-4 text-center space-y-2"><h4 class="font-bold text-emerald-800 text-base">🛡️ SSL Saugumas</h4><p class="text-xs text-gray-600">Mokėjimai yra apsaugoti 256 bitų šifravimu pagal aukščiausius bankinius standartus.</p></div>`;
+          break;
+        case 'group':
+          alternativeContent = `<div class="p-4 text-center space-y-2"><h4 class="font-bold text-white text-base">🎉 Išskirtinės Kelionės</h4><p class="text-xs text-emerald-100">Grupėms taip pat paruošiame nemokamas ekskursijas su gidu pasirinkta kalba.</p></div>`;
+          break;
+        case 'footer':
+          alternativeContent = `<div class="p-2 text-center"><p class="text-xs text-yellow-300 font-bold">Dėkojame, kad domitės mūsų kelionių oaze!</p></div>`;
+          break;
+      }
+
+      contentEl.innerHTML = alternativeContent;
+    }
+
+    function resetCard(cardId, contentId, backBtnId, type) {
+      event.stopPropagation();
+      const contentEl = document.getElementById(contentId);
+      const backBtn = document.getElementById(backBtnId);
+
+      if (cardDataStore[cardId]) {
+        contentEl.innerHTML = cardDataStore[cardId];
+      }
+      backBtn.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

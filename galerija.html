@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="lt" id="html-root" class="h-full m-0 p-0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="t-title">Galerija - Kelionių Akimirkos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { overflow-y: scroll; }
+    html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 100%; }
+    #main-logo { letter-spacing: 1px; }
+    .sticky-header { position: sticky; top: 0; z-index: 50; }
+    .interactive-card { cursor: pointer; transition: all 0.3s ease; }
+    .interactive-card:hover { transform: translateY(-3px); }
+  </style>
+</head>
+<body id="app-body" class="bg-gray-50 text-gray-800 flex flex-col min-h-screen m-0 p-0 w-full transition-colors duration-300">
+
+  <header class="sticky-header bg-emerald-700 text-white shadow-md w-full px-4 sm:px-6 py-4 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <h1 id="main-logo" onclick="openInfoModal('Apie Galeriją', 'Šioje galerijoje galite apžiūrėti mūsų organizuojamų kelionių kadrus bei rasti išsamią informaciją apie kiekvieną kryptį.')" class="text-xl sm:text-2xl font-bold interactive-card">
+        🌍 <span>Turizmas: Kelionių Galerija</span>
+      </h1>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMobileMenu()" class="md:hidden text-white focus:outline-none p-2 text-2xl" aria-label="Meniu">☰</button>
+      </div>
+
+      <nav id="nav-menu" class="hidden md:block w-full md:w-auto mt-4 md:mt-0">
+        <ul class="flex flex-col md:flex-row gap-3 md:gap-8 font-medium text-base">
+          <li><a href="turizmas.html" class="hover:underline block py-1">Pagrindinis</a></li>
+          <li><a href="apie.html" class="hover:underline block py-1">Apie mus</a></li>
+          <li><a href="galerija.html" class="underline font-bold block py-1">Galerija</a></li>
+          <li><a href="uzsakymas.html" class="hover:underline block py-1">Užsakymas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Pagrindinis konteineris -->
+  <div class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-4">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 items-start">
+      
+      <!-- Kairė pusė: Nuotraukos + Statistika -->
+      <main class="lg:col-span-3 space-y-0 w-full">
+        <div class="card-bg bg-white p-4 sm:p-5 rounded-t-lg shadow-sm border border-b-0 w-full transition-colors duration-300">
+          <h2 class="text-xl sm:text-2xl font-bold text-emerald-800 mb-1">Kelionių Akimirkų Nuotraukų Galerija</h2>
+          <p class="mb-3 text-xs sm:text-sm text-gray-600">Paspauskite ant patikusios nuotraukos, kad pamatytumėte išsamią informaciją ir kelionės kainą.</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="gallery-grid">
+            
+            <div class="photo-card border rounded p-2 bg-gray-50 text-gray-800 interactive-card" onclick="openImageModal('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80', 'Italijos Alpės', 'Žygiai ir slidinėjimas Italijos Alpėse. Nuostabūs kalnų vaizdai, grynas oras ir jaukūs kalnų nameliai.', 'Kaina nuo 599 €')">
+              <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Alpės" class="rounded shadow w-full h-36 sm:h-44 object-cover">
+              <h4 class="font-bold text-center mt-1.5 text-xs sm:text-sm">Italijos Alpės</h4>
+            </div>
+
+            <div class="photo-card border rounded p-2 bg-gray-50 text-gray-800 interactive-card" onclick="openImageModal('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', 'Maldyvų Pakrantė', 'Egzotinis poilsis ant balto smėlio kranto. Prabangūs kurortai ir nepakartojamas povandeninis pasaulis.', 'Kaina nuo 1299 €')">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Paplūdimys" class="rounded shadow w-full h-36 sm:h-44 object-cover">
+              <h4 class="font-bold text-center mt-1.5 text-xs sm:text-sm">Maldyvų Salos</h4>
+            </div>
+
+            <div class="photo-card border rounded p-2 bg-gray-50 text-gray-800 interactive-card" onclick="openImageModal('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80', 'Europos Architektūra', 'Kultūrinės ekskursijos po senamiesčius, istorijos paminklai ir jaukios gatvės.', 'Kaina nuo 349 €')">
+              <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" alt="Miestas" class="rounded shadow w-full h-36 sm:h-44 object-cover">
+              <h4 class="font-bold text-center mt-1.5 text-xs sm:text-sm">Senamiesčių Perlai</h4>
+            </div>
+
+            <div class="photo-card border rounded p-2 bg-gray-50 text-gray-800 interactive-card" onclick="openImageModal('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80', 'Santorini Graikijoje', 'Saulėlydžiai ir balti nameliai prie jūros. Romantiškiausia vieta Viduržemio jūros pakrantėje.', 'Kaina nuo 649 €')">
+              <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80" alt="Santorini" class="rounded shadow w-full h-36 sm:h-44 object-cover">
+              <h4 class="font-bold text-center mt-1.5 text-xs sm:text-sm">Santorini, Graikija</h4>
+            </div>
+
+            <div class="photo-card border rounded p-2 bg-gray-50 text-gray-800 interactive-card" onclick="openImageModal('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80', 'Tailando Džiunglės', 'Egzotika ir šventyklų paslaptys. Pažinkite laukinę gamtą, atogrąškų miškus ir kultūrinį paveldą.', 'Kaina nuo 899 €')">
+              <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80" alt="Tailandas" class="rounded shadow w-full h-36 sm:h-44 object-cover">
+              <h4 class="font-bold text-center mt-1.5 text-xs sm:text-sm">Tailando Gamta</h4>
+            </div>
+
+            <div class="photo-card border rounded p-2 bg-gray-50 text-gray-800 interactive-card" onclick="openImageModal('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80', 'Barselonos Gatvės', 'Meno, kultūros ir maisto festas. Architektūros šedevrai ir nepakartojama ispaniška dvasia.', 'Kaina nuo 399 €')">
+              <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80" alt="Ispanija" class="rounded shadow w-full h-36 sm:h-44 object-cover">
+              <h4 class="font-bold text-center mt-1.5 text-xs sm:text-sm">Barselona, Ispanija</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- STATISTIKOS JUOSTA -->
+        <div class="bg-emerald-800 text-white p-4 rounded-b-lg shadow-sm grid grid-cols-2 md:grid-cols-4 gap-3 text-center transition-colors duration-300">
+          <div>
+            <div class="text-xl sm:text-2xl font-bold">150+</div>
+            <div class="text-xs text-emerald-200">Pasaulio Krypčių</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-bold">12,000+</div>
+            <div class="text-xs text-emerald-200">Laimingų Keliautojų</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-bold">450+</div>
+            <div class="text-xs text-emerald-200">Galerijos Nuotraukų</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-bold">10 Metų</div>
+            <div class="text-xs text-emerald-200">Patirtis Turizme</div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Šoninė juosta dešinėje -->
+      <aside class="space-y-4 w-full lg:col-span-1">
+        
+        <!-- FOTO KONKURSAS -->
+        <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg shadow-sm w-full space-y-1.5 text-gray-800 transition-colors duration-300">
+          <h3 class="font-bold text-sm text-amber-900">Kelionių Foto Konkursas 📸</h3>
+          <p class="text-xs">Laimėkite 100 € kelionių kuponą! Įkelkite savo atostogų nuotrauką su žyme <b>#TurizmoOaze</b>.</p>
+          <button onclick="openInfoModal('Konkursas', 'Atsiųskite savo nuotraukas el. paštu foto@turizmas.lt iki kito mėnesio 1 d.')" class="bg-amber-600 text-white w-full py-1.5 rounded font-bold text-xs hover:bg-amber-700 transition">
+            Dalyvauti Konkurse
+          </button>
+        </div>
+
+        <!-- POPULIARIAUSIAS KADRAS -->
+        <div class="card-bg bg-white p-4 rounded-lg shadow-sm border w-full space-y-2 transition-colors duration-300">
+          <h3 class="font-bold text-sm text-emerald-900">Mėnesio Kadras 🏆</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Šį mėnesį daugiausiai bendruomenės simpatijų (1,420 👍) sulaukė Maldyvų pakrantės kadras. Ši nuotrauka išsiskiria nepriekaištinga natūralia simetrija, tolygiu apšvietimu ir raminančia spalvų gama, kuri idealiai perteikia atogrąškų ramybę.
+          </p>
+          <p class="text-xs text-gray-500 italic">
+            Autorius: Mantas V. (užfiksuota per grupinę kelionę spalio mėnesį).
+          </p>
+        </div>
+
+        <!-- FOTOGRAFAVIMO PATARIMAS -->
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg shadow-sm w-full space-y-2 text-gray-800 transition-colors duration-300">
+          <h3 class="font-bold text-sm text-emerald-900">Fotografavimo Patarimas 💡</h3>
+          <p class="text-xs text-gray-700 leading-relaxed">
+            Gražiausius kadrus kelionėse galite užfiksuoti anksti ryte arba saulėlydžio metu – tai vadinamoji <b>„auksinė valanda“</b>. Šiuo metu saulė yra žemai horizonte, o šviesa tampa itin švelni, šilta. Ilgesni šešėliai suteikia aplinkai gylio ir tekstūros.
+          </p>
+          <p class="text-xs text-emerald-800 font-semibold">
+            ✨ Patarimas: Fotografuojant prieš saulę, naudokite ekspozicijos koregavimą, kad išryškintumėte siluetus.
+          </p>
+        </div>
+
+        <div class="flex items-center justify-center pt-0">
+          <button onclick="openInfoModal('Galerijos taisyklės', 'Visos nuotraukos yra saugomos autorinių teisių. Draudžiama jas kopijuoti ar naudoti komerciniais tikslais be išankstinio bendrovės sutikimo.')" class="bg-emerald-600 text-white px-12 py-4 rounded-lg text-sm sm:text-base font-bold hover:bg-emerald-700 transition">
+            Skaityti Galerijos Taisykles
+          </button>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- PAPILDYTAS APRAŠYMO BLOKAS APAČIOJE -->
+    <div class="card-bg bg-white p-5 sm:p-6 rounded-lg shadow-sm border w-full space-y-5 transition-colors duration-300">
+      <div>
+        <h3 class="text-lg sm:text-xl font-bold text-emerald-800 mb-2">Apie Mūsų Kelionių Galeriją ir Kryptis</h3>
+        <p class="text-xs sm:text-sm text-gray-700 leading-relaxed space-y-2">
+          <span>Šioje vizualioje erdvėje pristatomos kruopščiai atrinktos mūsų organizuojamų kelionių akimirkos, geriausiai atspindinčios įspūdžius iš viso pasaulio kampelių. Mes nuolat atnaujiname maršrutus, kad galėtume pasiūlyti tik pačias įsimintiniausias patirtis tiek aktyvaus turizmo, tiek ramaus poilsio mėgėjams.</span><br><br>
+          <span>Kiekvienas keliautojas mūsų platformoje atras kažką ypatingo: nuo kvapą gniaužiančių kalnų viršūnių iki pasakiškų egzotinių salų paplūdimių bei turtingos kultūrinės istorijos Europos didmiesčių. Mūsų komanda pasiruošusi padėti įgyvendinti jūsų svajonių atostogas nuo A iki Z, užtikrinant sklandų procesą ir nepriekaištingą aptarnavimą kiekviename žingsnyje.</span><br><br>
+          <span>Nuolat investuojame į naujų krypčių paiešką, partnerių tinklo plėtrą bei gido paslaugų kokybės kėlimą, kad kiekviena išvyka viršytų jūsų lūkesčius ir paliktų tik šilčiausius prisiminimus visam gyvenimui.</span>
+        </p>
+      </div>
+
+      <!-- Kortelių tinklelis (12 vnt.) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-start">
+        
+        <!-- 1 -->
+        <div onclick="toggleAccordion('desc-1')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>📷 Autentiški Vaizdai</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Visos nuotraukos darytos mūsų keliautojų ir profesionalių gidų realiose kelionėse.</p>
+          </div>
+          <div id="desc-1" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Garantuojame visišką vaizdų tikrumą be apdorojimo apgaulių.</span>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div onclick="toggleAccordion('desc-2')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>🌟 Išskirtiniai Maršrutai</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Kiekviena galerijos vieta įtraukta į populiariausių kelionių sąrašus.</p>
+          </div>
+          <div id="desc-2" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Maršrutai nuolat tobulinami pagal klientų atsiliepimus.</span>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div onclick="toggleAccordion('desc-3')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>💼 Patogus Užsakymas</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Radę patikusį vaizdą, lengvai užsisakykite kelionę mūsų užsakymų puslapyje.</p>
+          </div>
+          <div id="desc-3" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Operatyvus užsakymų tvarkymas ir profesionalus palaikymas.</span>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div onclick="toggleAccordion('desc-4')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>🛡️ Saugios Kelionės</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Visos mūsų išvykos turi visapusišką draudimą ir patikimą partnerių palaikymą.</p>
+          </div>
+          <div id="desc-4" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Bendradarbiaujame tik su patikimiausiais tarptautiniais vežėjais.</span>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div onclick="toggleAccordion('desc-5')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>👥 Profesionalūs Gidai</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Jus lydi patyrę vietiniai ir lietuviškai kalbantys gidai, žinantys visas paslaptis.</p>
+          </div>
+          <div id="desc-5" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Gidai reguliariai kelia kvalifikaciją ir gido licencijas.</span>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div onclick="toggleAccordion('desc-6')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>💰 Geriausia Kaina</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Siūlome konkurencingas kainas ir reguliarias nuolaidas bei specialius pasiūlymus.</p>
+          </div>
+          <div id="desc-6" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Kainų garantija – radus pigiau, grąžiname skirtumą.</span>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div onclick="toggleAccordion('desc-7')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>🌐 Platus Asortimentas</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Nuo ramių paplūdimių iki ekstremalių žygių kalnuose – viskas vienoje vietoje.</p>
+          </div>
+          <div id="desc-7" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Virš 150 pasaulio krypčių kiekvieno skoniui.</span>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div onclick="toggleAccordion('desc-8')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>⭐ Klientų Įvertinimai</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Tūkstančiai patenkintų keliautojų rekomenduoja mus savo draugams.</p>
+          </div>
+          <div id="desc-8" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Vidutinis klientų pasitenkinimo balas siekia net 4.9/5.</span>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div onclick="toggleAccordion('desc-9')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>🕒 24/7 Pagalba</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Esame pasiekiami visą parą iškilus bet kokiems nenumatytiems klausimams.</p>
+          </div>
+          <div id="desc-9" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Operatyvi pagalba kelionės metu bet kuriame pasaulio taške.</span>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div onclick="toggleAccordion('desc-10')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>🌿 Ekologiškas Turizmas</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Rūpinamės gamta ir skatiname atsakingą keliavimą tausojant aplinką.</p>
+          </div>
+          <div id="desc-10" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Remiame vietines gamtos apsaugos iniciatyvas lankomose šalyse.</span>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div onclick="toggleAccordion('desc-11')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>🎁 Specialios Dovana</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Nuolatiniams klientams ir aktyviems dalyviams siūlome vertingus kuponus.</p>
+          </div>
+          <div id="desc-11" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Dalyvaukite foto konkursuose ir laimėkite nuolaidas kelionėms.</span>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div onclick="toggleAccordion('desc-12')" class="p-3 bg-gray-50 rounded border interactive-card hover:border-emerald-500 transition cursor-pointer flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-emerald-700 text-xs mb-1 flex items-center justify-between">
+              <span>✈️ Lankstūs Skrydžiai</span>
+              <span class="text-emerald-600 text-sm font-extrabold">✅</span>
+            </h4>
+            <p class="text-xs text-gray-600">Deriname patogiausius skrydžių laikus ir optimalius persėdimus jūsų patogumui.</p>
+          </div>
+          <div id="desc-12" class="hidden mt-2 pt-2 border-t border-gray-200 text-xs text-emerald-900 leading-relaxed">
+            <span>✨ Papildoma: Galimybė koreguoti išvykimo datas pagal asmeninius poreikius.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Iššokantys langai -->
+  <div id="image-modal" class="fixed inset-0 bg-black/85 hidden z-50 flex items-center justify-center p-4">
+    <div class="card-bg bg-white p-4 rounded-lg max-w-lg w-full text-center space-y-3 relative shadow-2xl overflow-y-auto max-h-[90vh]">
+      <h3 id="modal-img-title" class="text-lg font-bold text-emerald-800"></h3>
+      <img id="modal-img" src="" alt="Padidintas vaizdas" class="max-h-60 mx-auto rounded shadow object-cover w-full">
+      <p id="modal-img-desc" class="text-gray-700 text-xs sm:text-sm leading-relaxed"></p>
+      <span id="modal-img-price" class="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded font-bold text-xs sm:text-sm"></span>
+      <div>
+        <button onclick="closeModal('image-modal')" class="bg-emerald-600 text-white px-5 py-1.5 rounded font-bold hover:bg-emerald-700 transition text-xs">Uždaryti</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="info-modal" class="fixed inset-0 bg-black/70 hidden z-50 flex items-center justify-center p-4">
+    <div class="card-bg bg-white p-5 rounded-lg max-w-md w-full text-center space-y-3 shadow-xl">
+      <h3 id="modal-title" class="text-lg font-bold text-emerald-800"></h3>
+      <p id="modal-text" class="text-gray-700 text-xs sm:text-sm whitespace-pre-line leading-relaxed"></p>
+      <button onclick="closeModal('info-modal')" class="bg-emerald-600 text-white px-5 py-1.5 rounded font-bold hover:bg-emerald-700 transition text-xs">Uždaryti</button>
+    </div>
+  </div>
+
+  <footer class="bg-gray-800 text-gray-200 py-3 text-center text-xs mt-auto w-full px-4 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto"><p>© 2026 Turizmo Portalas. Visos teisės saugomos.</p></div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() { 
+      document.getElementById('nav-menu').classList.toggle('hidden'); 
+    }
+    
+    function openImageModal(src, title, desc, price) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal-img-title').innerText = title;
+      document.getElementById('modal-img-desc').innerText = desc;
+      document.getElementById('modal-img-price').innerText = price;
+      document.getElementById('image-modal').classList.remove('hidden');
+    }
+    
+    function openInfoModal(t, txt) { 
+      document.getElementById('modal-title').innerText = t; 
+      document.getElementById('modal-text').innerText = txt; 
+      document.getElementById('info-modal').classList.remove('hidden'); 
+    }
+    
+    function closeModal(id) { 
+      document.getElementById(id).classList.add('hidden'); 
+    }
+
+    function toggleAccordion(id) {
+      const target = document.getElementById(id);
+      const isOpen = target && !target.classList.contains('hidden');
+
+      // Uždarome visus elementus
+      for (let i = 1; i <= 12; i++) {
+        const el = document.getElementById('desc-' + i);
+        if (el) el.classList.add('hidden');
+      }
+
+      // Jei kortelė nebuvo atidaryta, atidarome ją; jei jau buvo atidupta – ji paliekama uždaryta
+      if (!isOpen && target) {
+        target.classList.remove('hidden');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('site_theme');
+      if (savedTheme === 'dark') {
+        document.getElementById('app-body').classList.add('theme-dark');
+      }
+
+      const savedFontSize = localStorage.getItem('site_font_size');
+      if (savedFontSize) {
+        document.documentElement.style.fontSize = savedFontSize;
+      }
+    });
+  </script>
+</body>
+</html>
